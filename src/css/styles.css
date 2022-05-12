@@ -1,0 +1,105 @@
+*{
+    scroll-behavior:smooth;
+}
+
+.thumbnail-product{
+    width: 100%;
+    padding: 5px;
+}
+
+.post-form-image {
+}
+
+.close-form{
+    transform: scale(0);
+    transition: 0.4s all;
+}
+
+.show{
+    transform: scale(1);
+    transition: 0.4s all;
+    position: relative;
+}
+
+
+
+.animation{
+    transform: translateY(-10rem);
+    transition: 0.4s all;
+}
+
+.animation-trip{
+    transform: translateY(-6rem);
+    transition: 0.4s all;
+}
+
+.animation-pay{
+    transform: translateY(-13rem);
+    transition: 0.4s all;
+}
+
+/* .info{
+    text-align: center;
+} */
+
+.info p{
+    margin-bottom: 0.3rem !important;
+}
+
+.level{
+    text-align: center;
+}
+
+.level span{
+    padding: 0.1rem 0.5rem;
+    font-size: 1rem;
+}
+
+
+.chair{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.table-show{
+    transform:translateY(0);
+    transition: 0.4s all;
+}
+
+
+
+ul.route{
+    list-style: none;
+    max-height: 4rem;
+}
+
+ul.route li{
+    margin: 3px 0;
+}
+
+.post-form-image #result{
+    display: flex;
+    flex-wrap: wrap;
+}
+.post-form-image #result div{
+    display: flex;
+    width: 25%;
+    padding: 3px;
+    position: relative;
+}
+
+.btn-delete-img{
+    position: absolute;
+    display: inline-block;
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 2px;
+    right: 2px;
+    top: 2px;
+}
+
+.btn-delete-img:hover{
+    color: rgb(216, 37, 37);
+}

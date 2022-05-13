@@ -20,7 +20,7 @@ export default function Navigation(props){
         </div>
         {/* Nav Item - Pages Collapse Menu */}
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/Pay" >
+          <a className="nav-link collapsed" href="/user/Pay" >
             <i className="fas fa-fw fa-table" />
             <span>Chuyến đã hoàn thành</span>
           </a>
@@ -33,7 +33,7 @@ export default function Navigation(props){
         </div>
         {/* Nav Item - Bus */}
         <li className={ props.toggleNav.bus ? ("nav-item active") : ("nav-item")}>
-          <a className="nav-link" href="/tablesTrip">
+          <a className="nav-link" href="/user/tablesBus">
             <i className="fas fa-fw fa-bus" />
             <span>Đặt chuyến mới</span></a>
         </li>

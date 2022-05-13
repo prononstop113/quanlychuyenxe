@@ -65,13 +65,12 @@ function App() {
               </nav>
               {/* End of Topbar */}
               <Routes>
-                <Route path="/user" element={<Trip/>}/>
-                <Route path="/Turnover" element={<Turnover/>}/>
+                <Route path="/user" element={<Pay/>}/>
                 <Route path="/user/Pay" element={<Pay/>}/>
                 {/* <Route path="tablesBus" element={<Bus/>}/>
                 <Route path="tablesBuses" element={<Buses/>}/>
                 <Route path="tablesDriver" element={<Driver/>}/> */}
-                <Route path="/user/tablesTrip" element={<Trip/>}/>
+                <Route path="/user/tablesBus" element={<Bus/>}/>
               </Routes>
             </div>
             {/* End of Main Content */}

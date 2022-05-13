@@ -457,9 +457,7 @@ export default function Buses() {
         </div>
       </div>
       <div
-        className={
-          !toggleTask ? "card shadow mb-4 close-form " : "card shadow mb-4 show"
-        }
+        className= "card shadow mb-4 show"
       >
         <div className="card-header py-3 d-flex justify-content-center ">
           <form className="form w-100" onSubmit={handleSubmit}>

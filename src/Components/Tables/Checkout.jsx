@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "../Search";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 export default function Pay() {
   const [toggleTask, setToggleTask] = useState(false);
@@ -12,18 +12,24 @@ export default function Pay() {
   //listBus
   const [listPaySave, setListPaySave] = useState([]);
 
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/user/confirm`; 
+    navigate(path);
+  }
 
-  
+  const routeChange2 = () =>{ 
+    let path = `/user/booking`; 
+    navigate(path);
+  }
 
-  //search
-  const [searchKey, setSearchKey] = useState("");
 
 
 
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/chuyenxe/done`)
+      .get(`http://localhost:8080/chuyenxe/booked`)
       .then((res) => {
         setListPay(res.data)
         setListPaySave(res.data)
@@ -37,7 +43,7 @@ export default function Pay() {
  //delete item
  const handleDelete=(value)=>{
   swal({
-    title: `Bạn có muốn xóa chuyến xe số ${value.id}?`,
+    title: `Bạn có muốn hủy chuyến xe số ${value.id}?`,
     icon: "warning",
     buttons: true,
     dangerMode: true,
@@ -55,42 +61,34 @@ export default function Pay() {
         icon: "success",
       });
       setTimeout(() => {
-        window.location.reload();
+        routeChange2()
       }, 1600);
     } 
   });
 }
 
+const handleBook=(value)=>{
+  value.trangthai="Paid"
+  axios.put(`http://localhost:8080/chuyenxe/${value.id}`,value)
+  swal("Thanh toán thành công!", {
+    icon: "success",
+  });
+  setTimeout(() => {
+    routeChange()
+  }, 1600);
+}
 
 
-  //Search
-  const actionSearch = (e) => {
-    const value = e.target.value;
-    const search = new RegExp(value, "i");
-    setSearchKey(search);
-  };
-
-  const handleSearch = () => {
-    // console.log(searchKey);
-    setListPay(listPaySave.filter((item) => item[1].match(searchKey)));
-  };
-
+  
   return (
     <div className="container-fluid">
       {/* Page Heading */}
-       
-      <div className="d-sm-flex d-flex justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">Danh sách các chuyến xe đã đặt</h1>
-        {/* Topbar Search */}
-        <Search actionSearch={actionSearch} handleSearch={handleSearch} />
-        {/* Topbar Navbar */}
-      </div>
 
       <div
         className="card shadow mb-4 show"
       >
         <div className="card-header py-3 d-flex justify-content-between">
-          <h6 className="m-0 font-weight-bold text-primary">Booked Trips</h6>
+          <h6 className="m-0 font-weight-bold text-primary">Checkout</h6>
           
         </div>
         <div className="card-body">
@@ -137,18 +135,28 @@ export default function Pay() {
                       <td>{item.gia}</td>
                       <td>{item.trangthai}</td>
                       <td>
+                      <input
+                          className="btn btn-success"
+                          type="button"
+                          onClick={()=>handleBook(item)}
+                          defaultValue="Book"
+                          style={{ marginRight: "1rem" }}
+                        />
                           <input
                           className="btn btn-danger"
                           type="button"
                           onClick={()=>handleDelete(item)}
                           defaultValue="Delete"
+                        
                         />
+                      
                       </td>
+                    
                     </tr>
                   )
                 ) : (
                   <tr>
-                    <td>Bạn chưa hoàn thành chuyến xe nào.</td>
+                    <td>Bạn cần phải đặt chuyến trước đã !</td>
                   </tr>
                 )}
               </tbody>

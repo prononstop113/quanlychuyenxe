@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "../Search";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Pay() {
   const [toggleTask, setToggleTask] = useState(false);
@@ -11,19 +12,30 @@ export default function Pay() {
 
   //listBus
   const [listPaySave, setListPaySave] = useState([]);
+//
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/user/Pay`; 
+    navigate(path);
+  }
+//
+  const [field,setField] = useState({
+    id : "",
+    tenkhachhang : "",
+    diemdi : "",
+    diemden:"",
+    phuongtien:"",
+    gia:"",
+    trangthai:""
+  });
 
-
-  
-
-  //search
-  const [searchKey, setSearchKey] = useState("");
 
 
 
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/chuyenxe/done`)
+      .get(`http://localhost:8080/chuyenxe/paid`)
       .then((res) => {
         setListPay(res.data)
         setListPaySave(res.data)
@@ -34,63 +46,46 @@ export default function Pay() {
       });
   }, []);
 
- //delete item
- const handleDelete=(value)=>{
+
+const handleBook=(value)=>{
   swal({
-    title: `Bạn có muốn xóa chuyến xe số ${value.id}?`,
+    title: `Bạn xác nhận chuyến ${value.id} đã hoàn thành ?`,
     icon: "warning",
     buttons: true,
     dangerMode: true,
   })
-  .then((willDelete) => {
-    if (willDelete) {
-        axios.delete(`http://localhost:8080/chuyenxe/${value.id}`,{data : value})
+  .then((willUpdate) => {
+    if (willUpdate) {
+        value.trangthai="Done"
+        axios.put(`http://localhost:8080/chuyenxe/${value.id}`,value)
           .then(res=>{
               console.log(res);
               })
           .catch(err=>{
               console.log(err);
           })
-      swal("Đã xóa thành công!", {
+      swal("Cảm ơn !", {
         icon: "success",
       });
       setTimeout(() => {
-        window.location.reload();
+        routeChange()
       }, 1600);
+
     } 
   });
 }
 
 
-
-  //Search
-  const actionSearch = (e) => {
-    const value = e.target.value;
-    const search = new RegExp(value, "i");
-    setSearchKey(search);
-  };
-
-  const handleSearch = () => {
-    // console.log(searchKey);
-    setListPay(listPaySave.filter((item) => item[1].match(searchKey)));
-  };
-
+  
   return (
     <div className="container-fluid">
       {/* Page Heading */}
-       
-      <div className="d-sm-flex d-flex justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">Danh sách các chuyến xe đã đặt</h1>
-        {/* Topbar Search */}
-        <Search actionSearch={actionSearch} handleSearch={handleSearch} />
-        {/* Topbar Navbar */}
-      </div>
 
       <div
         className="card shadow mb-4 show"
       >
         <div className="card-header py-3 d-flex justify-content-between">
-          <h6 className="m-0 font-weight-bold text-primary">Booked Trips</h6>
+          <h6 className="m-0 font-weight-bold text-primary">Confirm</h6>
           
         </div>
         <div className="card-body">
@@ -137,18 +132,21 @@ export default function Pay() {
                       <td>{item.gia}</td>
                       <td>{item.trangthai}</td>
                       <td>
-                          <input
-                          className="btn btn-danger"
+                      <input
+                          className="btn btn-success"
                           type="button"
-                          onClick={()=>handleDelete(item)}
-                          defaultValue="Delete"
+                          onClick={()=>handleBook(item)}
+                          defaultValue="Đã đến nơi"
+                          style={{ marginRight: "1rem" }}
                         />
+                      
                       </td>
+                    
                     </tr>
                   )
                 ) : (
                   <tr>
-                    <td>Bạn chưa hoàn thành chuyến xe nào.</td>
+                    <td>Bạn phải thanh toán xong trước đã.</td>
                   </tr>
                 )}
               </tbody>

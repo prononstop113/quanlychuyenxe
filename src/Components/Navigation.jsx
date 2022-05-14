@@ -33,9 +33,19 @@ export default function Navigation(props){
         </div>
         {/* Nav Item - Bus */}
         <li className={ props.toggleNav.bus ? ("nav-item active") : ("nav-item")}>
-          <a className="nav-link" href="/user/tablesBus">
+          <a className="nav-link" href="/user/booking">
             <i className="fas fa-fw fa-bus" />
             <span>Đặt chuyến mới</span></a>
+        </li>
+        <li className={ props.toggleNav.bus ? ("nav-item active") : ("nav-item")}>
+          <a className="nav-link" href="/user/checkout">
+            <i className="fas fa-fw fa-bus" />
+            <span>Thanh toán</span></a>
+        </li>
+        <li className={ props.toggleNav.bus ? ("nav-item active") : ("nav-item")}>
+          <a className="nav-link" href="/user/confirm">
+            <i className="fas fa-fw fa-bus" />
+            <span>xác nhận</span></a>
         </li>
       </ul>
     );

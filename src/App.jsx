@@ -3,12 +3,10 @@ import Navigation from "./Components/Navigation";
 import Footer from "./Components/Footer";
 import User from "./Components/User";
 import Bus from "./Components/Tables/Bus";
-import Buses from "./Components/Tables/Buses";
-import Driver from "./Components/Tables/Driver";
-import Trip from "./Components/Tables/Trip";
+import Checkout from "./Components/Tables/Checkout";
+import Confirm from "./Components/Tables/Confirm";
 import { useState } from "react";
 import Pay from "./Components/Tables/Pay";
-import Turnover from "./Components/Tables/Turnover";
 
 function App() {
 
@@ -67,10 +65,9 @@ function App() {
               <Routes>
                 <Route path="/user" element={<Pay/>}/>
                 <Route path="/user/Pay" element={<Pay/>}/>
-                {/* <Route path="tablesBus" element={<Bus/>}/>
-                <Route path="tablesBuses" element={<Buses/>}/>
-                <Route path="tablesDriver" element={<Driver/>}/> */}
-                <Route path="/user/tablesBus" element={<Bus/>}/>
+                <Route path="/user/checkout" element={<Checkout/>}/>
+                <Route path="/user/confirm" element={<Confirm/>}/>
+                <Route path="/user/booking" element={<Bus/>}/>
               </Routes>
             </div>
             {/* End of Main Content */}

@@ -1,18 +1,15 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -22,41 +19,43 @@ import org.hibernate.validator.constraints.Range;
 
 import lombok.Data;
 
-
-@Data
+@Data 
 @Entity
-@Table(name = "taixe", schema = "quanly")
-public class Driver implements Serializable{
+@Table(name = "chuyenxe", schema = "quanly")
+public class Chuyenxe implements Serializable{
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2522377480978137486L;
-
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idtaixe;
+	private int id;
 	
-	@NotNull
-	private String ten;
+	@Column( name = "tenkhachhang")
+	private String tenkhachhang;
 	
-	@NotNull
-	private int cccd;
+	@Column( name = "diemdi")
+	private String diemdi;
 	
-	@NotNull
-	private int mabang;
+	@Column(name ="diemden")
+	private String diemden;
+
+    @Column(name = "phuongtien")
+	private String phuongtien;
+    
+    @Column(name = "gia")
+  	private int gia;
 	
-	@NotNull
-	private String loaibang;
+    @Column(name = "trangthai")
+	private String trangthai;
+    
+      
 	
-	@NotNull
-	private String diachi;
 	
-	@NotNull
-	private Date ngaysinh;
 	
-	@NotNull
-	private int thamnien;
+
 	
+	
+	
+	
+    
+  
 }
